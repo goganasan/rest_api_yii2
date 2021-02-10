@@ -7,18 +7,18 @@
 </p>
 
 # 1.First task - SQL code
-![Image alt](https://github.com/{username}/{repository}/raw/{branch}/{path}/image.png)
+![Image alt](https://github.com/goganasan/rest_api_yii2/raw/master/images/image.png)
 
-SELECT u.id, u.firstName, u.lastName, bk.author, group_concat(bk.name)
-FROM Users u
-  INNER JOIN User_Books b 
-    ON u.id = b.user_id
-  INNER JOIN Books bk 
-    ON b.book_id = bk.id
-WHERE u.age BETWEEN 7 AND 17
-  AND u.id IN 
-    (SELECT user_id FROM User_Books GROUP BY user_id HAVING COUNT(*) = 2)
-GROUP BY u.id HAVING COUNT(DISTINCT bk.author) = 1
+SELECT u.id, u.firstName, u.lastName, bk.author, group_concat(bk.name)<br>
+FROM Users u <br>
+ &nbsp; INNER JOIN User_Books b <br>
+ &nbsp;&nbsp;   ON u.id = b.user_id <br>
+ &nbsp; INNER JOIN Books bk <br>
+ &nbsp;&nbsp;   ON b.book_id = bk.id <br>
+WHERE u.age BETWEEN 7 AND 17 <br>
+ &nbsp;AND u.id IN <br>
+ &nbsp;&nbsp;   (SELECT user_id FROM User_Books GROUP BY user_id HAVING COUNT(*) = 2) <br>
+GROUP BY u.id HAVING COUNT(DISTINCT bk.author) = 1 <br>
 
 
 # 2.Second task - Restful api currency converter
