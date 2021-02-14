@@ -9,7 +9,7 @@
 # 1.First task - SQL code
 ![Image alt](https://github.com/goganasan/rest_api_yii2/raw/master/images/image.png)
 
-SELECT u.id, u.firstName, u.lastName, bk.author, group_concat(bk.name)<br>
+<pre><i>SELECT u.id, u.firstName || ',' || u.lastName, bk.author, group_concat(bk.name)<br>
 FROM Users u <br>
  &nbsp; INNER JOIN User_Books b <br>
  &nbsp;&nbsp;   ON u.id = b.user_id <br>
@@ -18,12 +18,13 @@ FROM Users u <br>
 WHERE u.age BETWEEN 7 AND 17 <br>
  &nbsp;AND u.id IN <br>
  &nbsp;&nbsp;   (SELECT user_id FROM User_Books GROUP BY user_id HAVING COUNT(*) = 2) <br>
-GROUP BY u.id HAVING COUNT(DISTINCT bk.author) = 1 <br>
+GROUP BY u.id HAVING COUNT(DISTINCT bk.author) = 1 <br></i></pre>
 
 
 # 2.Second task - Restful api currency converter
 
-
+![Image alt](https://github.com/goganasan/rest_api_yii2/raw/master/images/firstPHP.PNG)<br>
+![Image alt](https://github.com/goganasan/rest_api_yii2/raw/master/images/secondPHP.PNG)<br>
 DIRECTORY STRUCTURE
 -------------------
 
