@@ -9,7 +9,7 @@
 # 1.First task - SQL code
 ![Image alt](https://github.com/goganasan/rest_api_yii2/raw/master/images/image.png)
 
-<pre><i>SELECT u.id, u.firstName, u.lastName, bk.author, group_concat(bk.name)<br>
+<pre><i>SELECT u.id, u.firstName || ',' || u.lastName, bk.author, group_concat(bk.name)<br>
 FROM Users u <br>
  &nbsp; INNER JOIN User_Books b <br>
  &nbsp;&nbsp;   ON u.id = b.user_id <br>
