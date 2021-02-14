@@ -24,6 +24,22 @@ $config = [
         'response' => [
             'format' => yii\web\Response::FORMAT_JSON,
             'charset' => 'UTF-8',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                if ($response->data !== null && $response->statusCode === 200) {
+                    $response->data = [
+                        'status' => 'success',
+                        'code' => $response->statusCode,
+                        'data' => $response->data
+                    ];
+                } elseif ($response->data !== null) {
+                    $response->data = [
+                        'status' => 'error',
+                        'code' => $response->statusCode,
+                        'message' => $response->data['message'],
+                    ];
+                }
+            },
         ],
         'user' => [
             'identityClass' => 'app\api\modules\v1\models\User',
@@ -52,25 +68,25 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'v1/user', 
-                    //'only' => ['login'],
                     'extraPatterns' => ['POST login' => 'login']
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/rates', 
-                    //'only' => ['index'],
-                    'tokens' => ['{id}' => '<id:\\w+>'], 
-                    'extraPatterns' => ['GET index' => 'index']
+                    'controller' => ['v1/rates'],
+                    'pluralize' => false,
+                    'patterns' => [
+                        'GET' => 'index',
+                    ]
                 ],              
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/convert', 
-                    //'only' => ['index'],
-                    'tokens' => ['{id}' => '<id:\\w+>'], 
-                    'extraPatterns' => ['POST index' => 'index']
+                    'controller' => ['v1/convert'], 
+                    'pluralize' => false,
+                    'patterns' => [
+                        'POST' => 'index'
+                    ],
                 ],              
                 
-//                'pluralize' => false,
             ],
         ],
     ],

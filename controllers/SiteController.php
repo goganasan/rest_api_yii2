@@ -83,4 +83,50 @@ class SiteController extends Controller
     {
         return $this->render('check_access');
     }
+    
+    public function actionSendPost()
+    {
+        $postdata = array(
+            'currencyFrom' => 'BTC',
+            'currencyTo' => 'usd',
+            'value' => 0.01
+        );
+        $postdata = json_encode($postdata);
+        $ch = curl_init('http://localhost/currency-exchange/api/v1/convert');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+              'Content-Type: application/json',
+              'Authorization: Bearer CyKieUrNrQrQymnal5LyLF4TUOIpIyUl')
+          );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        $output = curl_exec($ch);
+        var_dump($output); die;
+        if ($output === FALSE) {
+            echo "cURL Error: " . curl_error($ch);
+            return;
+        }
+        print_r($output);
+        curl_close($ch);
+    }
+    
+    public function actionSendGet()
+    {
+        $ch = curl_init('http://localhost/currency-exchange/api/v1/rates');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+              'Content-Type: application/json',
+              'Authorization: Bearer CyKieUrNrQrQymnal5LyLF4TUOIpIyUl')
+          );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        $output = curl_exec($ch);
+        var_dump($output); die;
+        if ($output === FALSE) {
+            echo "cURL Error: " . curl_error($ch);
+            return;
+        }
+        print_r($output);
+        curl_close($ch);
+    }
 }

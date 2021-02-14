@@ -13,7 +13,7 @@ use yii\rest\Controller;
  * 
  * @author Krulikovskiy Igor
  */ 
-class RatesController extends Controller
+class RatesController extends ApiController
 {
     public $modelClass = 'app\api\modules\v1\models\Rates';
     
@@ -25,12 +25,13 @@ class RatesController extends Controller
     public function actionIndex() 
     {
     	$ratesFromSrc = Rates::getCurrencyFromSrc();
-        $countiesNamesArray = array_keys($ratesFromSrc['data']);
+        $countiesNamesArray = array_keys($ratesFromSrc);
         
         if (!empty(Yii::$app->request->get('currency')) && in_array(Yii::$app->request->get('currency'),$countiesNamesArray)) {
-            return Rates::getOneCurrency(Yii::$app->request->get('currency'),$ratesFromSrc['data']);
+            return Rates::getOneCurrency(Yii::$app->request->get('currency'),$ratesFromSrc);
         } else {
-            return Rates::formingResponse($ratesFromSrc['code'], $ratesFromSrc['data']);
+            asort($ratesFromSrc);
+            return $ratesFromSrc;
         }    
     }
 }

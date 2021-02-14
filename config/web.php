@@ -49,6 +49,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/convert' => 'site/convert'
 //                'class' => 'yii\rest\UrlRule',
 //                'controller' => 'user',
 //                'pluralize' => false,

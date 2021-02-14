@@ -4,10 +4,10 @@ namespace app\api\modules\v1\controllers;
 
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\ContentNegotiator;
-use yii\rest\ActiveController;
+use yii\rest\Controller;
 use yii\web\Response;
 
-class ApiController extends ActiveController
+class ApiController extends Controller
 {
     public $modelClass = false;
 

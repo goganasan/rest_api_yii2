@@ -11,7 +11,8 @@ use yii\captcha\Captcha;
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<form method="post" action="http://localhost/currency-exchange/api/v1/convert">
+
+<form method="post" action="send-post">
     <input name="currency_from">
     <input name="currency_to">
     <input name="value">
